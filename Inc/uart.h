@@ -7,24 +7,19 @@
 #include "stm32f0xx_hal.h"
 
 #define DATA_SEND_TIMEOUT 100
+#define _NUCLEO64
 
+UART_HandleTypeDef huart;
 UART_HandleTypeDef huart2;
 
-// implement this function in your code to act on commands received from the
-// serial port
-// DO NOT change this empty implementation
-// __weak void executeSerialCommand(char str[]) {
-    
-// }
-
-// // Function to enable printf for debugging
-// int _write(int file, char* data, int len) {
-//     HAL_UART_Transmit(&huart, (uint8_t*)data, len, DATA_SEND_TIMEOUT);
-//     return len;
-// }
-
 void MX_USART2_UART_Init(void);
+void MX_USART_UART_Init(void);
 
 void Test_UART(void);
+
+// CUBEMX error handling functions
+void _Error_Handler(char *, int);
+
+#define Error_Handler() _Error_Handler(__FILE__, __LINE__)
 
 #endif /* __UART_H */
