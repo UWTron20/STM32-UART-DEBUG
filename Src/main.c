@@ -18,7 +18,7 @@ int main(void)
   SystemClock_Config();
 
   MX_GPIO_Init();
-  MX_USART2_UART_Init();
+  MX_USART_UART_Init();
   MX_RTC_Init();
 
   Test_UART();

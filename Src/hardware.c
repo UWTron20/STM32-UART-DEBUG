@@ -58,7 +58,7 @@ void SystemClock_Config(void)
 }
 
 /* RTC init function */
-static void MX_RTC_Init(void)
+void MX_RTC_Init(void)
 {
 
   RTC_TimeTypeDef sTime;
@@ -113,7 +113,7 @@ static void MX_RTC_Init(void)
         * EVENT_OUT
         * EXTI
 */
-static void MX_GPIO_Init(void)
+void MX_GPIO_Init(void)
 {
 
   GPIO_InitTypeDef GPIO_InitStruct;
