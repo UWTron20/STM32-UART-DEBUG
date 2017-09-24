@@ -57,6 +57,7 @@ Middlewares/Third_Party/FreeRTOS/Source/queue.c \
 Src/freertos.c \
 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_tim_ex.c \
 Src/uart.c \
+Src/hardware.c \
 Src/main.c \
 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_rtc_ex.c \
 Drivers/STM32F0xx_HAL_Driver/Src/stm32f0xx_hal_flash.c \
