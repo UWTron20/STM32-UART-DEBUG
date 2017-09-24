@@ -1,0 +1,286 @@
+ARM GAS  C:\Users\Raj\AppData\Local\Temp\cciJp66V.s 			page 1
+
+
+   1              		.cpu cortex-m0
+   2              		.eabi_attribute 20, 1
+   3              		.eabi_attribute 21, 1
+   4              		.eabi_attribute 23, 3
+   5              		.eabi_attribute 24, 1
+   6              		.eabi_attribute 25, 1
+   7              		.eabi_attribute 26, 1
+   8              		.eabi_attribute 30, 1
+   9              		.eabi_attribute 34, 0
+  10              		.eabi_attribute 18, 4
+  11              		.file	"uart.c"
+  12              		.text
+  13              	.Ltext0:
+  14              		.cfi_sections	.debug_frame
+  15              		.section	.text.MX_USART2_UART_Init,"ax",%progbits
+  16              		.align	1
+  17              		.global	MX_USART2_UART_Init
+  18              		.syntax unified
+  19              		.code	16
+  20              		.thumb_func
+  21              		.fpu softvfp
+  23              	MX_USART2_UART_Init:
+  24              	.LFB35:
+  25              		.file 1 "Src/uart.c"
+   1:Src/uart.c    **** #include <errno.h>
+   2:Src/uart.c    **** #include <sys/unistd.h>
+   3:Src/uart.c    **** #include <stdio.h>
+   4:Src/uart.c    **** 
+   5:Src/uart.c    **** #include "uart.h"
+   6:Src/uart.c    **** 
+   7:Src/uart.c    **** /* USART2 init function */
+   8:Src/uart.c    **** void MX_USART2_UART_Init(void)
+   9:Src/uart.c    **** {
+  26              		.loc 1 9 0
+  27              		.cfi_startproc
+  28              		@ args = 0, pretend = 0, frame = 0
+  29              		@ frame_needed = 0, uses_anonymous_args = 0
+  30 0000 10B5     		push	{r4, lr}
+  31              	.LCFI0:
+  32              		.cfi_def_cfa_offset 8
+  33              		.cfi_offset 4, -8
+  34              		.cfi_offset 14, -4
+  10:Src/uart.c    **** 
+  11:Src/uart.c    ****   huart2.Instance = USART2;
+  35              		.loc 1 11 0
+  36 0002 0D48     		ldr	r0, .L4
+  37 0004 0D4B     		ldr	r3, .L4+4
+  38 0006 0360     		str	r3, [r0]
+  12:Src/uart.c    ****   huart2.Init.BaudRate = 9600;
+  39              		.loc 1 12 0
+  40 0008 9623     		movs	r3, #150
+  41 000a 9B01     		lsls	r3, r3, #6
+  42 000c 4360     		str	r3, [r0, #4]
+  13:Src/uart.c    ****   huart2.Init.WordLength = UART_WORDLENGTH_8B;
+  43              		.loc 1 13 0
+  44 000e 0023     		movs	r3, #0
+  45 0010 8360     		str	r3, [r0, #8]
+ARM GAS  C:\Users\Raj\AppData\Local\Temp\cciJp66V.s 			page 2
+
+
+  14:Src/uart.c    ****   huart2.Init.StopBits = UART_STOPBITS_1;
+  46              		.loc 1 14 0
+  47 0012 C360     		str	r3, [r0, #12]
+  15:Src/uart.c    ****   huart2.Init.Parity = UART_PARITY_NONE;
+  48              		.loc 1 15 0
+  49 0014 0361     		str	r3, [r0, #16]
+  16:Src/uart.c    ****   huart2.Init.Mode = UART_MODE_TX_RX;
+  50              		.loc 1 16 0
+  51 0016 0C22     		movs	r2, #12
+  52 0018 4261     		str	r2, [r0, #20]
+  17:Src/uart.c    ****   huart2.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  53              		.loc 1 17 0
+  54 001a 8361     		str	r3, [r0, #24]
+  18:Src/uart.c    ****   huart2.Init.OverSampling = UART_OVERSAMPLING_16;
+  55              		.loc 1 18 0
+  56 001c C361     		str	r3, [r0, #28]
+  19:Src/uart.c    ****   huart2.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+  57              		.loc 1 19 0
+  58 001e 0362     		str	r3, [r0, #32]
+  20:Src/uart.c    ****   huart2.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+  59              		.loc 1 20 0
+  60 0020 4362     		str	r3, [r0, #36]
+  21:Src/uart.c    ****   if (HAL_UART_Init(&huart2) != HAL_OK)
+  61              		.loc 1 21 0
+  62 0022 FFF7FEFF 		bl	HAL_UART_Init
+  63              	.LVL0:
+  64 0026 0028     		cmp	r0, #0
+  65 0028 00D1     		bne	.L3
+  66              	.L1:
+  22:Src/uart.c    ****   {
+  23:Src/uart.c    ****     _Error_Handler(__FILE__, __LINE__);
+  24:Src/uart.c    ****   }
+  25:Src/uart.c    **** 
+  26:Src/uart.c    **** }
+  67              		.loc 1 26 0
+  68              		@ sp needed
+  69 002a 10BD     		pop	{r4, pc}
+  70              	.L3:
+  23:Src/uart.c    ****   }
+  71              		.loc 1 23 0
+  72 002c 1721     		movs	r1, #23
+  73 002e 0448     		ldr	r0, .L4+8
+  74 0030 FFF7FEFF 		bl	_Error_Handler
+  75              	.LVL1:
+  76              		.loc 1 26 0
+  77 0034 F9E7     		b	.L1
+  78              	.L5:
+  79 0036 C046     		.align	2
+  80              	.L4:
+  81 0038 00000000 		.word	huart2
+  82 003c 00440040 		.word	1073759232
+  83 0040 00000000 		.word	.LC1
+  84              		.cfi_endproc
+  85              	.LFE35:
+  87              		.section	.text.Test_UART,"ax",%progbits
+  88              		.align	1
+  89              		.global	Test_UART
+ARM GAS  C:\Users\Raj\AppData\Local\Temp\cciJp66V.s 			page 3
+
+
+  90              		.syntax unified
+  91              		.code	16
+  92              		.thumb_func
+  93              		.fpu softvfp
+  95              	Test_UART:
+  96              	.LFB36:
+  27:Src/uart.c    **** 
+  28:Src/uart.c    **** void Test_UART(void)
+  29:Src/uart.c    **** {
+  97              		.loc 1 29 0
+  98              		.cfi_startproc
+  99              		@ args = 0, pretend = 0, frame = 0
+ 100              		@ frame_needed = 0, uses_anonymous_args = 0
+ 101 0000 10B5     		push	{r4, lr}
+ 102              	.LCFI1:
+ 103              		.cfi_def_cfa_offset 8
+ 104              		.cfi_offset 4, -8
+ 105              		.cfi_offset 14, -4
+  30:Src/uart.c    ****     HAL_UART_Transmit(&huart2, "Hello World \n", 13, 0xFFFF);
+ 106              		.loc 1 30 0
+ 107 0002 034B     		ldr	r3, .L7
+ 108 0004 0D22     		movs	r2, #13
+ 109 0006 0349     		ldr	r1, .L7+4
+ 110 0008 0348     		ldr	r0, .L7+8
+ 111 000a FFF7FEFF 		bl	HAL_UART_Transmit
+ 112              	.LVL2:
+  31:Src/uart.c    **** }
+ 113              		.loc 1 31 0
+ 114              		@ sp needed
+ 115 000e 10BD     		pop	{r4, pc}
+ 116              	.L8:
+ 117              		.align	2
+ 118              	.L7:
+ 119 0010 FFFF0000 		.word	65535
+ 120 0014 00000000 		.word	.LC3
+ 121 0018 00000000 		.word	huart2
+ 122              		.cfi_endproc
+ 123              	.LFE36:
+ 125              		.section	.text._write,"ax",%progbits
+ 126              		.align	1
+ 127              		.global	_write
+ 128              		.syntax unified
+ 129              		.code	16
+ 130              		.thumb_func
+ 131              		.fpu softvfp
+ 133              	_write:
+ 134              	.LFB37:
+  32:Src/uart.c    **** 
+  33:Src/uart.c    **** int _write(int file, char *data, int len)
+  34:Src/uart.c    **** {
+ 135              		.loc 1 34 0
+ 136              		.cfi_startproc
+ 137              		@ args = 0, pretend = 0, frame = 0
+ 138              		@ frame_needed = 0, uses_anonymous_args = 0
+ 139              	.LVL3:
+ 140 0000 10B5     		push	{r4, lr}
+ 141              	.LCFI2:
+ARM GAS  C:\Users\Raj\AppData\Local\Temp\cciJp66V.s 			page 4
+
+
+ 142              		.cfi_def_cfa_offset 8
+ 143              		.cfi_offset 4, -8
+ 144              		.cfi_offset 14, -4
+ 145 0002 1400     		movs	r4, r2
+  35:Src/uart.c    ****   // if((file != STDOUT_FILENO) && (file != STDERR_FILENO))
+  36:Src/uart.c    ****   // {
+  37:Src/uart.c    ****   //   errno = EBADF;
+  38:Src/uart.c    ****   //   return -1;
+  39:Src/uart.c    ****   // }
+  40:Src/uart.c    **** 
+  41:Src/uart.c    ****   HAL_StatusTypeDef status = HAL_UART_Transmit(&huart2, (uint8_t*)data, len, 1000);
+ 146              		.loc 1 41 0
+ 147 0004 92B2     		uxth	r2, r2
+ 148              	.LVL4:
+ 149 0006 FA23     		movs	r3, #250
+ 150 0008 9B00     		lsls	r3, r3, #2
+ 151 000a 0448     		ldr	r0, .L13
+ 152              	.LVL5:
+ 153 000c FFF7FEFF 		bl	HAL_UART_Transmit
+ 154              	.LVL6:
+  42:Src/uart.c    **** 
+  43:Src/uart.c    ****   return (status == HAL_OK ? len : 0);
+ 155              		.loc 1 43 0
+ 156 0010 0028     		cmp	r0, #0
+ 157 0012 01D0     		beq	.L12
+ 158 0014 0020     		movs	r0, #0
+ 159              	.LVL7:
+ 160              	.L9:
+  44:Src/uart.c    **** }
+ 161              		.loc 1 44 0
+ 162              		@ sp needed
+ 163              	.LVL8:
+ 164 0016 10BD     		pop	{r4, pc}
+ 165              	.LVL9:
+ 166              	.L12:
+  43:Src/uart.c    **** }
+ 167              		.loc 1 43 0
+ 168 0018 2000     		movs	r0, r4
+ 169              	.LVL10:
+ 170 001a FCE7     		b	.L9
+ 171              	.L14:
+ 172              		.align	2
+ 173              	.L13:
+ 174 001c 00000000 		.word	huart2
+ 175              		.cfi_endproc
+ 176              	.LFE37:
+ 178              		.comm	huart2,112,4
+ 179              		.section	.rodata.MX_USART2_UART_Init.str1.4,"aMS",%progbits,1
+ 180              		.align	2
+ 181              	.LC1:
+ 182 0000 5372632F 		.ascii	"Src/uart.c\000"
+ 182      75617274 
+ 182      2E6300
+ 183              		.section	.rodata.Test_UART.str1.4,"aMS",%progbits,1
+ 184              		.align	2
+ 185              	.LC3:
+ 186 0000 48656C6C 		.ascii	"Hello World \012\000"
+ARM GAS  C:\Users\Raj\AppData\Local\Temp\cciJp66V.s 			page 5
+
+
+ 186      6F20576F 
+ 186      726C6420 
+ 186      0A00
+ 187              		.text
+ 188              	.Letext0:
+ 189              		.file 2 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q1-update\\arm-none-eabi\\include
+ 190              		.file 3 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q1-update\\arm-none-eabi\\include
+ 191              		.file 4 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q1-update\\arm-none-eabi\\include
+ 192              		.file 5 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q1-update\\lib\\gcc\\arm-none-eab
+ 193              		.file 6 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q1-update\\arm-none-eabi\\include
+ 194              		.file 7 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q1-update\\arm-none-eabi\\include
+ 195              		.file 8 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q1-update\\arm-none-eabi\\include
+ 196              		.file 9 "c:\\program files (x86)\\gnu tools arm embedded\\6 2017-q1-update\\arm-none-eabi\\include
+ 197              		.file 10 "Drivers/CMSIS/Device/ST/STM32F0xx/Include/system_stm32f0xx.h"
+ 198              		.file 11 "Drivers/CMSIS/Device/ST/STM32F0xx/Include/stm32f072xb.h"
+ 199              		.file 12 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_def.h"
+ 200              		.file 13 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_dma.h"
+ 201              		.file 14 "Drivers/STM32F0xx_HAL_Driver/Inc/stm32f0xx_hal_uart.h"
+ 202              		.file 15 "Inc/uart.h"
+ 203              		.file 16 "Inc/main.h"
+ARM GAS  C:\Users\Raj\AppData\Local\Temp\cciJp66V.s 			page 6
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 uart.c
+C:\Users\Raj\AppData\Local\Temp\cciJp66V.s:16     .text.MX_USART2_UART_Init:00000000 $t
+C:\Users\Raj\AppData\Local\Temp\cciJp66V.s:23     .text.MX_USART2_UART_Init:00000000 MX_USART2_UART_Init
+C:\Users\Raj\AppData\Local\Temp\cciJp66V.s:81     .text.MX_USART2_UART_Init:00000038 $d
+                            *COM*:00000070 huart2
+C:\Users\Raj\AppData\Local\Temp\cciJp66V.s:88     .text.Test_UART:00000000 $t
+C:\Users\Raj\AppData\Local\Temp\cciJp66V.s:95     .text.Test_UART:00000000 Test_UART
+C:\Users\Raj\AppData\Local\Temp\cciJp66V.s:119    .text.Test_UART:00000010 $d
+C:\Users\Raj\AppData\Local\Temp\cciJp66V.s:126    .text._write:00000000 $t
+C:\Users\Raj\AppData\Local\Temp\cciJp66V.s:133    .text._write:00000000 _write
+C:\Users\Raj\AppData\Local\Temp\cciJp66V.s:174    .text._write:0000001c $d
+C:\Users\Raj\AppData\Local\Temp\cciJp66V.s:180    .rodata.MX_USART2_UART_Init.str1.4:00000000 $d
+C:\Users\Raj\AppData\Local\Temp\cciJp66V.s:184    .rodata.Test_UART.str1.4:00000000 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+HAL_UART_Init
+_Error_Handler
+HAL_UART_Transmit
