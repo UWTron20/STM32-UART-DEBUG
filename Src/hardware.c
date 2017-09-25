@@ -141,6 +141,19 @@ void MX_GPIO_Init(void)
 
 }
 
+
+void Get_Current_Date(rtc_date_t * date)
+{
+  RTC_DateTypeDef hrtc_date;
+
+  HAL_RTC_GetDate(&hrtc, &hrtc_date, RTC_FORMAT_BCD);
+  
+  printf("Date BCD: %d, /n", hrtc_date.Date);
+  printf("Month BCD: %d, /n", hrtc_date.Month);
+  printf("Year BCD: %d, /n", hrtc_date.Year);
+
+}
+
 /**
   * @brief  This function is executed in case of error occurrence.
   * @param  None

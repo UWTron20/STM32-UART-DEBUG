@@ -10,6 +10,8 @@ osThreadId defaultTaskHandle;
 
 void StartDefaultTask(void const * argument);
 
+rtc_date_t rtc_date;
+
 int main(void)
 {
   HAL_Init();
@@ -19,9 +21,13 @@ int main(void)
 
   MX_GPIO_Init();
   MX_USART_UART_Init();
-  MX_RTC_Init();
+  
 
   Test_UART();
+  printf("RTC Configuration....");
+  MX_RTC_Init();
+  printf("RTC Configured.");
+  Get_Current_Date(&rtc_date);
 
   osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
   defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);

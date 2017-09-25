@@ -9,7 +9,7 @@ void MX_USART_UART_Init(void)
 #ifdef _NUCLEO64
   huart.Instance = USART2;
 #else
-  huart.Instance = USART3;
+  huart.Instance = USART2;
 #endif
   huart.Init.BaudRate = 9600;
   huart.Init.WordLength = UART_WORDLENGTH_8B;
@@ -50,7 +50,7 @@ void MX_USART_UART_Init(void)
 
 void Test_UART(void)
 {
-    HAL_UART_Transmit(&huart, "Hello World \n", 13, 0xFFFF);
+    HAL_UART_Transmit(&huart, "UART Running \n", 13, 0xFFFF);
 }
 
 int _write(int file, char *data, int len)
@@ -61,7 +61,7 @@ int _write(int file, char *data, int len)
     return -1;
   }
 
-  HAL_StatusTypeDef status = HAL_UART_Transmit(&huart2, (uint8_t*)data, len, 1000);
+  HAL_StatusTypeDef status = HAL_UART_Transmit(&huart, (uint8_t*)data, len, 1000);
 
   return (status == HAL_OK ? len : 0);
 }
