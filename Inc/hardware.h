@@ -28,16 +28,19 @@ typedef struct {
     uint8_t year;
 } rtc_date_t;
 
+// Hex representation (Converted form BCD)
+typedef struct {
+    uint8_t second;
+    uint8_t min;
+    uint8_t hour;
+} rtc_time_t;
+
 void SystemClock_Config(void);
 void MX_GPIO_Init(void);
 void MX_RTC_Init(void);
 
 void Get_Current_Date(rtc_date_t * date);
-
-// CUBEMX error handling functions
-void _Error_Handler(char *, int);
-
-#define Error_Handler() _Error_Handler(__FILE__, __LINE__)
-
+void Get_Current_Time(rtc_time_t * time);
+void Toggle_Nucleo_LED(uint32_t time, uint32_t number_of_flash);
 
 #endif /* __HARDWARE */

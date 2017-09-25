@@ -148,43 +148,30 @@ void Get_Current_Date(rtc_date_t * date)
 
   HAL_RTC_GetDate(&hrtc, &hrtc_date, RTC_FORMAT_BCD);
   
-  printf("Date BCD: %d, /n", hrtc_date.Date);
-  printf("Month BCD: %d, /n", hrtc_date.Month);
-  printf("Year BCD: %d, /n", hrtc_date.Year);
+  printf("Date BCD: %d, \r\n", hrtc_date.Date);
+  printf("Month BCD: %d, \r\n", hrtc_date.Month);
+  printf("Year BCD: %d, \r\n", hrtc_date.Year);
 
 }
 
-/**
-  * @brief  This function is executed in case of error occurrence.
-  * @param  None
-  * @retval None
-  */
-  void _Error_Handler(char * file, int line)
-  {
-    /* USER CODE BEGIN Error_Handler_Debug */
-    /* User can add his own implementation to report the HAL error return state */
-    while(1) 
+void Get_Current_Time(rtc_time_t * time)
+{
+  RTC_TimeTypeDef hrtc_time;
+
+  HAL_RTC_GetTime(&hrtc, &hrtc_time, RTC_FORMAT_BCD);
+  
+  printf("Second BCD: %d, \r\n", hrtc_time.Seconds);
+  printf("Min BCD: %d, \r\n", hrtc_time.Minutes);
+  printf("Hour BCD: %d, \r\n", hrtc_time.Hours);
+
+}
+
+void Toggle_Nucleo_LED(uint32_t time, uint32_t number_of_flash)
+{ 
+    number_of_flash *= 2;
+    for(int i = 0; i < number_of_flash; i++)
     {
+        HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+        HAL_Delay(time);
     }
-    /* USER CODE END Error_Handler_Debug */ 
-  }
-  
-  #ifdef USE_FULL_ASSERT
-  
-  /**
-     * @brief Reports the name of the source file and the source line number
-     * where the assert_param error has occurred.
-     * @param file: pointer to the source file name
-     * @param line: assert_param error line source number
-     * @retval None
-     */
-  void assert_failed(uint8_t* file, uint32_t line)
-  {
-    /* USER CODE BEGIN 6 */
-    /* User can add his own implementation to report the file name and line number,
-      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-    /* USER CODE END 6 */
-  
-  }
-  
-  #endif
+}

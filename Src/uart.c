@@ -50,15 +50,15 @@ void MX_USART_UART_Init(void)
 
 void Test_UART(void)
 {
-    HAL_UART_Transmit(&huart, "UART Running \n", 13, 0xFFFF);
+    HAL_UART_Transmit(&huart, "UART Running \r\n", 15, 0xFFFF);
 }
 
 int _write(int file, char *data, int len)
 {
   if((file != STDOUT_FILENO) && (file != STDERR_FILENO))
   {
-    errno = EBADF;
-    return -1;
+     errno = EBADF;
+     return -1;
   }
 
   HAL_StatusTypeDef status = HAL_UART_Transmit(&huart, (uint8_t*)data, len, 1000);
