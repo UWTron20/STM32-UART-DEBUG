@@ -27,13 +27,12 @@ int main(void)
 
   Test_UART();
 
+  Get_RTC_Status();
   Get_Current_Date(&rtc_date);
   Get_Current_Time(&rtc_time);
 
   osThreadDef(defaultTask, task_rtc_check_time, osPriorityNormal, 0, 128);
   defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
-
-  Get_RTC_Status();
 
   /* Start scheduler */
   osKernelStart();
