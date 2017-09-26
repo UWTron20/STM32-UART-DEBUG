@@ -41,6 +41,15 @@ void MX_RTC_Init(void);
 
 void Get_Current_Date(rtc_date_t * date);
 void Get_Current_Time(rtc_time_t * time);
+
+void Get_RTC_Status(void);
+
 void Toggle_Nucleo_LED(uint32_t time, uint32_t number_of_flash);
+
+// CUBEMX error handling functions
+void _Error_Handler(char *, int);
+
+#define Error_Handler() _Error_Handler(__FILE__, __LINE__)
+
 
 #endif /* __HARDWARE */

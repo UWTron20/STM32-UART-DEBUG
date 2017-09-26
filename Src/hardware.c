@@ -75,7 +75,12 @@ void MX_RTC_Init(void)
   hrtc.Init.OutPutType = RTC_OUTPUT_TYPE_OPENDRAIN;
   if (HAL_RTC_Init(&hrtc) != HAL_OK)
   {
+    printf("Error Setting up RTC \r\n");
     _Error_Handler(__FILE__, __LINE__);
+  }
+  else
+  {
+    printf("RTC - Initialized \r\n");
   }
 
     /**Initialize RTC and set the Time and Date 
@@ -146,7 +151,7 @@ void Get_Current_Date(rtc_date_t * date)
 {
   RTC_DateTypeDef hrtc_date;
 
-  HAL_RTC_GetDate(&hrtc, &hrtc_date, RTC_FORMAT_BCD);
+  HAL_RTC_GetDate(&hrtc, &hrtc_date, RTC_FORMAT_BIN);
   
   printf("Date BCD: %d, \r\n", hrtc_date.Date);
   printf("Month BCD: %d, \r\n", hrtc_date.Month);
@@ -158,12 +163,35 @@ void Get_Current_Time(rtc_time_t * time)
 {
   RTC_TimeTypeDef hrtc_time;
 
-  HAL_RTC_GetTime(&hrtc, &hrtc_time, RTC_FORMAT_BCD);
+  HAL_RTC_GetTime(&hrtc, &hrtc_time, RTC_FORMAT_BIN);
   
   printf("Second BCD: %d, \r\n", hrtc_time.Seconds);
   printf("Min BCD: %d, \r\n", hrtc_time.Minutes);
   printf("Hour BCD: %d, \r\n", hrtc_time.Hours);
 
+}
+
+void Get_RTC_Status(void)
+{
+  HAL_RTCStateTypeDef rtc_state = HAL_RTC_GetState(&hrtc);
+  switch(rtc_state)
+  {
+    case HAL_RTC_STATE_ERROR:
+    printf("RTC: ERROR STATUS ---- !!!!! \r\n");
+    break;
+    case HAL_RTC_STATE_BUSY:
+    printf("RTC: BUSY STATUS \r\n");
+    break;
+    case HAL_RTC_STATE_RESET:
+    printf("RTC: RESET STATUS \r\n");
+    break;
+    case HAL_RTC_STATE_TIMEOUT:
+    printf("RTC: TIMEOUT STATUS \r\n");
+    break;
+    default:
+    printf("RTC: READY STATUS \r\n");
+    break;
+  }
 }
 
 void Toggle_Nucleo_LED(uint32_t time, uint32_t number_of_flash)
@@ -175,3 +203,41 @@ void Toggle_Nucleo_LED(uint32_t time, uint32_t number_of_flash)
         HAL_Delay(time);
     }
 }
+
+
+/**
+  * @brief  This function is executed in case of error occurrence.
+  * @param  None
+  * @retval None
+  */
+  void _Error_Handler(char * file, int line)
+  {
+    /* USER CODE BEGIN Error_Handler_Debug */
+    /* User can add his own implementation to report the HAL error return state */
+    while(1) 
+    {
+      HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+      HAL_Delay(500);
+    }
+    /* USER CODE END Error_Handler_Debug */ 
+  }
+  
+  #ifdef USE_FULL_ASSERT
+  
+  /**
+     * @brief Reports the name of the source file and the source line number
+     * where the assert_param error has occurred.
+     * @param file: pointer to the source file name
+     * @param line: assert_param error line source number
+     * @retval None
+     */
+  void assert_failed(uint8_t* file, uint32_t line)
+  {
+    /* USER CODE BEGIN 6 */
+    /* User can add his own implementation to report the file name and line number,
+      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
+    /* USER CODE END 6 */
+  
+  }
+  
+  #endif

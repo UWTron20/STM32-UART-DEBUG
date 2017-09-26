@@ -50,6 +50,7 @@ void MX_USART_UART_Init(void)
 
 void Test_UART(void)
 {
+  printf("------------------------------ RESET -------------------------- \r\n");
     HAL_UART_Transmit(&huart, "UART Running \r\n", 15, 0xFFFF);
 }
 

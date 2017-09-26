@@ -10,6 +10,7 @@
 osThreadId defaultTaskHandle;
 
 void StartDefaultTask(void const * argument);
+void task_rtc_check_time(void const * argument);
 
 rtc_date_t rtc_date;
 rtc_time_t rtc_time;
@@ -17,8 +18,7 @@ rtc_time_t rtc_time;
 int main(void)
 {
   HAL_Init();
-
-
+ 
   SystemClock_Config();
 
   MX_GPIO_Init();
@@ -27,15 +27,13 @@ int main(void)
 
   Test_UART();
 
-  printf("RTC Configuration \r\n");
-
-  printf("RTC Configured. \r\n");
-
   Get_Current_Date(&rtc_date);
   Get_Current_Time(&rtc_time);
 
-  osThreadDef(defaultTask, StartDefaultTask, osPriorityNormal, 0, 128);
+  osThreadDef(defaultTask, task_rtc_check_time, osPriorityNormal, 0, 128);
   defaultTaskHandle = osThreadCreate(osThread(defaultTask), NULL);
+
+  Get_RTC_Status();
 
   /* Start scheduler */
   osKernelStart();
@@ -64,39 +62,16 @@ void StartDefaultTask(void const * argument)
   /* USER CODE END 5 */ 
 }
 
-/**
-  * @brief  This function is executed in case of error occurrence.
-  * @param  None
-  * @retval None
-  */
-  void _Error_Handler(char * file, int line)
+void task_rtc_check_time(void const * argument)
+{
+
+  /* USER CODE BEGIN 5 */
+  /* Infinite loop */
+  for(;;)
   {
-    /* USER CODE BEGIN Error_Handler_Debug */
-    /* User can add his own implementation to report the HAL error return state */
-    while(1) 
-    {
-      HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
-      HAL_Delay(500);
-    }
-    /* USER CODE END Error_Handler_Debug */ 
+    Get_Current_Time(&rtc_time);
+    osDelay(5000);
   }
-  
-  #ifdef USE_FULL_ASSERT
-  
-  /**
-     * @brief Reports the name of the source file and the source line number
-     * where the assert_param error has occurred.
-     * @param file: pointer to the source file name
-     * @param line: assert_param error line source number
-     * @retval None
-     */
-  void assert_failed(uint8_t* file, uint32_t line)
-  {
-    /* USER CODE BEGIN 6 */
-    /* User can add his own implementation to report the file name and line number,
-      ex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-    /* USER CODE END 6 */
-  
-  }
-  
-  #endif
+  /* USER CODE END 5 */ 
+}
+
