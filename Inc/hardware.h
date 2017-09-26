@@ -19,6 +19,14 @@
 #define TCK_Pin GPIO_PIN_14
 #define TCK_GPIO_Port GPIOA
 
+
+#define RTC_CLOCK_LSI
+
+#ifdef RTC_CLOCK_LSI
+  #define RTC_ASYNCH_PREDIV  0x7F
+  #define RTC_SYNCH_PREDIV 0x0130
+#endif
+
 RTC_HandleTypeDef hrtc;
 
 // Hex representation (Converted form BCD)

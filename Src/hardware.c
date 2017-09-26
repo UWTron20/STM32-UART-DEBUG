@@ -15,6 +15,7 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
   RCC_OscInitStruct.HSICalibrationValue = 16;
   RCC_OscInitStruct.LSIState = RCC_LSI_ON;
+  RCC_OscInitStruct.LSEState = RCC_LSE_OFF;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
   RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
   RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL12;
@@ -165,9 +166,9 @@ void Get_Current_Time(rtc_time_t * time)
 
   HAL_RTC_GetTime(&hrtc, &hrtc_time, RTC_FORMAT_BIN);
   
-  printf("Second BCD: %d, \r\n", hrtc_time.Seconds);
-  printf("Min BCD: %d, \r\n", hrtc_time.Minutes);
-  printf("Hour BCD: %d, \r\n", hrtc_time.Hours);
+  printf("Second BCD: %02d, \r\n", hrtc_time.Seconds);
+  printf("Min BCD: %02d, \r\n", hrtc_time.Minutes);
+  printf("Hour BCD: %02d, \r\n", hrtc_time.Hours);
 
 }
 
